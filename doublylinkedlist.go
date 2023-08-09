@@ -18,7 +18,7 @@ func addfront(num int){
 	if head==nil{
 		head=front
 		tail=front
-		return;
+		return
 	}
     front.next=head
 	head.prev=front
@@ -27,27 +27,25 @@ func addfront(num int){
 
 func insert(num,pos int){
 	var th *node =head
-	count++
 	if(pos<=0){
 		addfront(num)
-		return;
+		return
 	}
-	if(pos>size){
+	if(pos>count){
 		addback(num)
-		return;
+		return
 	}
+	count++
+
 	for ;pos>1; {
         th=th.next
+		pos--
 	}
     temp:=&node{nil,num,nil}
 	temp.prev=th
 	temp.next=th.next
 	th.next=temp
 	temp.next.prev=temp//if we use like this we can able to change temp variables next address previous variable
-	
-
-
-
 }
 
 func addback(num int){
@@ -56,7 +54,7 @@ func addback(num int){
 	if head==nil{
 		head=back
 		tail=back
-		return;
+		return
 	}
 	back.prev=tail
 	tail.next=back
@@ -67,12 +65,12 @@ func deletefront(){
    count--
    if(head==nil){
 	fmt.Println("the list is empty")
-	return;
+	return
    }
    if(head.next==nil){
 	head=nil
 	tail=nil
-	return;
+	return
    }
    head=head.next
    head.prev=nil
@@ -82,20 +80,73 @@ func deleteback(){
 	count--
 	if(head==nil){
 		fmt.Println("the list is empty")
-		return;
+		return
 	   }
 	   if(head.next==nil){
 		head=nil
 		tail=nil
-		return;
+		return
 	   }
 	   tail=tail.prev
 	   tail.next=nil
 }
 
+func deleterandom(pos int){
+	if(pos==0){
+		deletefirst()
+		return
+	   }
+	   if(pos==count){
+		deletelast()
+		return
+	   }
+	count--
+	if(head==nil){
+		fmt.Println("the list is empty")
+		return
+	   }
+	   if(head.next==nil){
+		head=nil
+		tail=nil
+		return
+	   }
+	   var th *node=head
+	   
+	   for ;pos>0; {
+             th=th.next
+			 pos--
+	   }
+	   th.prev.next = th.next
+	   th.next.prev=th.prev
+}
+ func fronttraversal(){
+       var th *node=head
+	   for ;th.next!=nil;{
+          fmt.Println(th.val)
+		  th=th.next
+	   }
+ }
 
 
+ func backtraversal(){
+	var th *node=tail
+	for ;th.prev!=nil;{
+	   fmt.Println(th.val)
+	   th=th.prev
+	}
+ }
 
 func main(){
-
+ fmt.Println("choose from the options given below")
+ fmt.Println("\n1.Insert in begining\n2.Insert at last\n3.Insert at any random location\n4.Delete from Beginning\n  
+ 5.Delete from last\n6.Delete the node after the given data\n7.Search\n8.Show\n9.Exit\n")
+ var choice int
+ fmt.Scanln(&choice)
+ switch(choice){
+ case 1:{
+	var num int
+	fmt.Println("enter the value to be added in the first")
+	fmt.Scanln()
+ }
+ }
 }
